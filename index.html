@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendy Pamer IP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Efek bintang berkedip */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 3px 3px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffd700, #ff8c00, #ff4500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 3px 3px 5px rgba(0, 0, 0, 0.3); }
+            100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.9), 5px 5px 15px rgba(0, 0, 0, 0.5); }
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 20px 0;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 85%;
+            max-width: 650px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 0 4px rgba(255, 215, 0, 0.3), 
+                        0 0 50px rgba(255, 165, 0, 0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            z-index: 5;
+            perspective: 1000px;
+        }
+
+        .main-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 2;
+        }
+
+        .main-image-container:hover {
+            transform: scale(1.02) rotateY(3deg) rotateX(2deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 
+                        0 0 0 6px rgba(255, 215, 0, 0.4), 
+                        0 0 70px rgba(255, 165, 0, 0.6);
+        }
+
+        #mainImage {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .main-image-container:hover #mainImage {
+            transform: scale(1.05);
+        }
+
+        .floating-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-image {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            bottom: -100px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 
+                        0 0 15px rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            animation: float linear infinite;
+            z-index: 2;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-image:hover {
+            transform: scale(1.2) rotate(15deg);
+            z-index: 100;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 
+                        0 0 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .floating-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Animasi yang lebih cepat dan berputar */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(-100vh - 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .effect-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.2;
+        }
+
+        .effect-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 215, 0, 0.7);
+            border-radius: 50%;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .main-image-container {
+                width: 95%;
+            }
+            
+            #mainImage {
+                height: 400px;
+            }
+            
+            .floating-image {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            #mainImage {
+                height: 320px;
+            }
+            
+            .floating-image {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efek bintang latar belakang -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Layer efek tambahan -->
+    <div class="effect-layer" id="effectLayer"></div>
+    
+    <!-- Gambar-gambar kecil melayang -->
+    <div class="floating-images" id="floatingContainer"></div>
+
+    <div class="container">
+        <header>
+            <h1>Wendy Pamer Ip</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- Gambar utama Wendy -->
+            <div class="main-image-container">
+                <img id="mainImage" src="wndy.png" alt="Wendy Pamer IP">
+            </div>
+        </div>
+
+        <footer>
+            <p>wendy pamer ip 😜</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.getElementById('stars');
+            const floatingContainer = document.getElementById('floatingContainer');
+            const effectLayer = document.getElementById('effectLayer');
+            const mainImage = document.getElementById('mainImage');
+            
+            // Buat efek bintang
+            function createStars() {
+                const starsCount = 200;
+                for (let i = 0; i < starsCount; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
+                    star.style.animationDelay = `${Math.random() * 5}s`;
+                    star.style.width = `${Math.random() * 3}px`;
+                    star.style.height = star.style.width;
+                    starsContainer.appendChild(star);
+                }
+            }
+            
+            // Buat efek titik-titik
+            function createEffectDots() {
+                const dotsCount = 30;
+                for (let i = 0; i < dotsCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('effect-dot');
+                    dot.style.left = `${Math.random() * 100}%`;
+                    dot.style.top = `${Math.random() * 100}%`;
+                    dot.style.animationDelay = `${Math.random() * 4}s`;
+                    dot.style.width = `${4 + Math.random() * 8}px`;
+                    dot.style.height = dot.style.width;
+                    effectLayer.appendChild(dot);
+                }
+            }
+            
+            // Buat gambar melayang
+            function createFloatingImage() {
+                const img = document.createElement('div');
+                img.className = 'floating-image';
+                
+                // Set posisi acak
+                const leftPos = 5 + Math.random() * 90;
+                img.style.left = `${leftPos}%`;
+                
+                // Set ukuran acak (lebih kecil)
+                const size = 30 + Math.random() * 50;
+                img.style.width = `${size}px`;
+                img.style.height = `${size}px`;
+                
+                // Set kecepatan animasi acak (lebih cepat)
+                const duration = 4 + Math.random() * 7; // 8-15 detik
+                img.style.animationDuration = `${duration}s`;
+                
+                // Set delay animasi acak
+                const delay = Math.random() * 2;
+                img.style.animationDelay = `${delay}s`;
+                
+                // Gunakan gambar yang sama dengan gambar utama
+                const clonedImage = mainImage.cloneNode(true);
+                clonedImage.style.width = '100%';
+                clonedImage.style.height = '100%';
+                clonedImage.style.objectFit = 'cover';
+                clonedImage.style.borderRadius = '13px';
+                img.appendChild(clonedImage);
+                
+                floatingContainer.appendChild(img);
+                
+                // Hapus elemen setelah selesai animasi untuk menghindari penumpukan
+                setTimeout(() => {
+                    img.remove();
+                }, duration * 1000);
+            }
+            
+            // Buat banyak gambar melayang (dengan jumlah lebih sedikit)
+            function generateFloatingImages() {
+                // Buat beberapa gambar saat halaman dimuat
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        createFloatingImage();
+                    }, i * 300); // Interval lebih pendek
+                }
+                
+                // Terus buat gambar baru secara periodik (lebih jarang)
+                setInterval(() => {
+                    createFloatingImage();
+                }, 1200); // Interval lebih pendek
+            }
+            
+            // Animasi judul
+            function animateTitle() {
+                const title = document.querySelector('h1');
+                setInterval(() => {
+                    title.style.transform = 'scale(1.03)';
+                    setTimeout(() => {
+                        title.style.transform = 'scale(1)';
+                    }, 500);
+                }, 3000);
+            }
+            
+            // Inisialisasi efek
+            createStars();
+            createEffectDots();
+            generateFloatingImages();
+            animateTitle();
+        });
+    </script>
+</body>
+</html>
